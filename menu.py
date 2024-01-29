@@ -1,7 +1,9 @@
 #Módulo de Menú
 import sqlite3
 
-
+"""Módulo de Menú (clase BaseDatosMenu): Permite gestionar la información de los productos en el menú registrados.
+Incluye: clave, nombre y precio del producto.
+    """
 
 class BaseDatosMenu:
     def __init__(self, nombre_archivo="menu.db"):
@@ -35,6 +37,7 @@ class BaseDatosMenu:
         self.conexion.close()
 
 def pedir_datos_menu():
+    #Ingresar un nuevo producto al Menú
     clave = input("Ingrese la clave del producto: ")
     nombre = input("Ingrese el nombre del producto: ")
     precio = input("Ingrese el precio del producto: ")
@@ -46,17 +49,20 @@ def pedir_datos_menu():
     #Menu de funcionalidad de la base de datos
 
 def mostrar_lista_menu(base_datos_menu):
+    #Mostrar lista de productos en el menú
     menus = base_datos_menu.obtener_menu()
     print("Lista de productos en el Menu:")
     for menu in menus:
         print(menu)
 
 def agregar_menu(base_datos_menu):
+    #Agregar un nuevo producto
     clave, nombre, precio = pedir_datos_menu()
     base_datos_menu.agregar_menu(clave, nombre, precio)
     print("Producto agregado correctamente al Menú.")
 
 def modificar_menu(base_datos_menu):
+    #Modificar datos de un producto por número de clave
     clave = input("Ingrese el número de clave del producto a modificar: ")
     
     # Solicitar los nuevos datos del producto del Menú
@@ -73,6 +79,7 @@ def modificar_menu(base_datos_menu):
 
 
 def eliminar_menu(base_datos_menu):
+    #Eliminar producto por número de clave
     clave = input("Ingrese el número de clave del producto a eliminar: ")
     base_datos_menu.cursor.execute("DELETE FROM menu WHERE clave=?", (clave,))
     base_datos_menu.conexion.commit()

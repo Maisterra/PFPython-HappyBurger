@@ -1,7 +1,9 @@
 #Módulo de clientes
 import sqlite3
 
-
+"""Módulo de Clientes (clase BaseDatosClientes): Permite gestionar la información de los clientes registrados. 
+Incluye: clave, nombre, dirección, email y teléfono.
+    """
 
 class BaseDatosClientes:
     def __init__(self, nombre_archivo="clientes.db"):
@@ -37,6 +39,7 @@ class BaseDatosClientes:
         self.conexion.close()
 
 def pedir_datos_cliente():
+    #Ingresar datos del cliente
     clave = input("Ingrese la clave del cliente: ")
     nombre = input("Ingrese el nombre del cliente: ")
     direccion = input("Ingrese la dirección del cliente: ")
@@ -56,14 +59,16 @@ def mostrar_lista_clientes(base_datos_clientes):
         print(cliente)
 
 def agregar_cliente(base_datos_clientes):
+    #Agregar cliente nuevo
     clave, nombre, direccion, email, telefono = pedir_datos_cliente()
     base_datos_clientes.agregar_cliente(clave, nombre, direccion, email, telefono)
     print("Cliente agregado correctamente.")
 
 def modificar_cliente(base_datos_clientes):
+    #Modificar cliente exixtente por clave de cliente
     clave = input("Ingrese la clave del cliente que desea modificar: ")
     
-    # Solicitar los nuevos datos del cliente
+    # Solicitar los nuevos datos del cliente a modificar
     nueva_clave = input("Ingrese la nueva clave del cliente: ")
     nuevo_nombre = input("Ingrese el nuevo nombre del cliente: ")
     nueva_direccion = input("Ingrese la nueva dirección del cliente: ")
@@ -79,6 +84,7 @@ def modificar_cliente(base_datos_clientes):
 
 
 def eliminar_cliente(base_datos_clientes):
+    #Eliminar cliente por clave de cliente
     clave = input("Ingrese la clave del cliente que desea eliminar: ")
     base_datos_clientes.cursor.execute("DELETE FROM clientes WHERE clave=?", (clave,))
     base_datos_clientes.conexion.commit()
@@ -121,3 +127,4 @@ if __name__ == "__main__":
     main()
 
 
+    

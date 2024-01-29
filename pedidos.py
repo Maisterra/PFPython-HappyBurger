@@ -1,7 +1,9 @@
 #Módulo de pedidos
 import sqlite3
 
-
+"""Módulo de Pedidos (clase BaseDatosPedidos): Permite gestionar la información de los clientes registrados. 
+Incluye: pedido, nombre, producto y precio.
+    """
 
 class BaseDatosPedidos: 
     
@@ -37,6 +39,7 @@ class BaseDatosPedidos:
         self.conexion.close()
 
 def pedir_datos_pedido():
+    #Ingresar nuevo pedido
     pedido = input("Ingrese el número de pedido: ")
     nombre = input("Ingrese el nombre de la persona: ")
     producto = input("Ingrese el nombre del producto: ")
@@ -49,17 +52,20 @@ def pedir_datos_pedido():
     #Menu de funcionalidad de la base de datos
 
 def mostrar_lista_productos(base_datos_pedidos):
+    #Mostrar lista de pedidos
     pedidos = base_datos_pedidos.obtener_pedidos()
     print("Lista de pedidos:")
     for pedido in pedidos:
         print(pedido)
 
 def agregar_pedido(base_datos_pedidos):
+    #Agregar nuevo pedido
     pedido, nombre, producto, precio = pedir_datos_pedido()
     base_datos_pedidos.agregar_pedido(pedido, nombre, producto, precio)
     print("Pedido agregado correctamente.")
 
 def modificar_pedidos(base_datos_pedidos):
+    #Modificar pedido por número de pedido
     pedido = input("Ingrese el número de pedido que desea modificar: ")
     
     # Solicitar los nuevos datos del pedido
@@ -77,6 +83,7 @@ def modificar_pedidos(base_datos_pedidos):
 
 
 def eliminar_pedido(base_datos_pedidos):
+    #Eliminar pedido
     pedido = input("Ingrese el número de pedido que desea eliminar: ")
     base_datos_pedidos.cursor.execute("DELETE FROM pedidos WHERE pedido=?", (pedido,))
     base_datos_pedidos.conexion.commit()
@@ -84,6 +91,7 @@ def eliminar_pedido(base_datos_pedidos):
 
 
 def mostrar_menu():
+    #Mostrar Menú de gestión de pedidos
     print("Menú:")
     print("1. Ver lista de pedidos")
     print("2. Agregar pedido")
